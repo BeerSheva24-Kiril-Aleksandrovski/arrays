@@ -14,32 +14,19 @@ public class Arrays {
         res[ar.length] = number;
         return res;
     }
-
+    
     public static int[] insert(int[] ar, int index, int number) {
-        int i;
-        int[] newArr = java.util.Arrays.copyOf(ar, ar.length + 1);
-        for (i = 0; i < newArr.length; i++) {
-            if (i < index - 1)
-                newArr[i] = ar[i];
-            else if (i == index - 1)
-                newArr[i] = number;
-            else
-                newArr[i] = ar[i - 1];
-        }
+        int [] newArr = new int[ar.length + 1];
+        System.arraycopy(ar, 0, newArr, 0, index);
+        newArr [index] = number;
+        System.arraycopy(ar, index, newArr, index + 1, ar.length - index);
         return newArr;
     }
 
     public static int[] remove(int[] numbers, int index) {
-        int i;
-        int[] newArr = java.util.Arrays.copyOf(numbers, numbers.length - 1);
-        for (i = 0; i < numbers.length - 1; i++) {
-            if (i < index - 1)
-                newArr[i] = numbers[i];
-            else if (i == index - 1)
-                newArr[i] = numbers[i + 1];
-            else
-                newArr[i] = numbers[i + 1];
-        }
+        int [] newArr = new int[numbers.length - 1];
+        System.arraycopy(numbers, 0, newArr, 0, index);
+        System.arraycopy(numbers, index + 1, newArr, index, numbers.length - index - 1);
         return newArr;
     }
 }

@@ -26,21 +26,24 @@ void addTest() {
 void insertTest() {
     int newNumber = 100;
     int [] expected = {10, 7, 12, -4, newNumber, 13, 3, 14};
-    assertArrayEquals(expected, insert(numbers,5,100 ));
+    assertArrayEquals(expected, insert(numbers,4,100 ));
     int [] expected1 = {newNumber, 10, 7, 12, -4, 13, 3, 14};
-    assertArrayEquals(expected1, insert(numbers,1,100 ));
+    assertArrayEquals(expected1, insert(numbers,0,100 ));
     int [] expected2 = {10, 7, 12, -4, 13, 3, 14, newNumber};
-    assertArrayEquals(expected2, insert(numbers,8,100 ));
+    assertArrayEquals(expected2, insert(numbers,7,100 ));
     
 }
 
 @Test
 void removeTest() {
     int [] expected = {10, 7, 12, -4, 3, 14};
-    assertArrayEquals(expected, remove(numbers,5));
+    assertArrayEquals(expected, remove(numbers,4));
     int [] expected1 = {7, 12, -4, 13, 3, 14};
-    assertArrayEquals(expected1, remove(numbers,1));
+    assertArrayEquals(expected1, remove(numbers,0));
     int [] expected2 = {10, 7, 12, -4, 13, 3};
-    assertArrayEquals(expected2, remove(numbers,8));
+    assertArrayEquals(expected2, remove(numbers,6));
+    int [] expected3 = {10, 7, -4, 13, 3, 14};
+    assertArrayEquals(expected3, remove(numbers,2));
+
 }
 }
