@@ -92,12 +92,13 @@ public class Arrays {
         // arSorted is sorted array
         // to insert number at index to keep the array sorted
         // additional sorting is disallowed
-        int[] newArr = java.util.Arrays.copyOf(arSorted, arSorted.length + 1);
+        int[] newArr; 
         int pos = binarySearch(arSorted, number);
         if (pos < 0) {
             pos = Math.abs(pos) - 1;
-            newArr[pos] = number;
-            System.arraycopy(arSorted, pos, newArr, pos + 1, arSorted.length - pos);
+            newArr = insert(arSorted, pos, number);
+        } else {
+            newArr = insert(arSorted, pos, number);
         }
         return newArr;
     }
@@ -111,8 +112,8 @@ public class Arrays {
         int mismatch = 0;
         for (int i = 0; i < array.length; i++) {        //swaping is a action with two elements
             if (array[i] != sortedArr[i])               //so if we have 2 elements on wrong places => isOneSwap must return true
-                mismatch++;                             //if we have only 1 element(have no pair for swaping) => isOneSwap must return false
+                mismatch++;                             
         }                                               //if we have sorted array and no elements on a wrong places => isOneSwap must return false
-        return mismatch == 2 ? true : false;            
+        return mismatch == 2 ? true : false;        
     }
 }

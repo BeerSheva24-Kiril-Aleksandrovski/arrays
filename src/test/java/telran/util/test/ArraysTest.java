@@ -94,8 +94,10 @@ void insertSortedTest () {
     assertArrayEquals((expectedEnd), insertSorted(arSorted, 15));
     int [] expectedMid =  {-4, 3, 4, 7, 10, 12, 13, 14};
     assertArrayEquals(expectedMid, insertSorted(arSorted, 4));
-    int [] expectedMid1 =  {-4, 3, 7, 10, 11, 12, 13, 14};
-    assertArrayEquals(expectedMid1,insertSorted(arSorted, 11));
+    int [] expectedMid1 =  {-4, 3, 7, 10, 10, 12, 13, 14};
+    assertArrayEquals(expectedMid1,insertSorted(arSorted, 10));
+    int [] expectedBeg2 =  {-4, -4, 3, 7, 10, 12, 13, 14};
+    assertArrayEquals(expectedBeg2,insertSorted(arSorted, -4));
 }
 @Test
 void isOneSwapTest() {
@@ -106,7 +108,7 @@ void isOneSwapTest() {
     assertFalse(isOneSwap(new int [] {1,2,3,4,5,6}));       //no need to swap
     assertTrue(isOneSwap(new int [] {1,2,4,3,5,6}));        //swap 4 and 3 => number of swaps = 1 
     assertFalse(isOneSwap(new int [] {1,2,3,5,6,4}));       //numer of swops = 2
-
+    assertFalse(isOneSwap(new int [] {1,2,3,4,5,6,1}));
 
 }
 }
