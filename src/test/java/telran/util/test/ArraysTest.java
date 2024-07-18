@@ -111,4 +111,36 @@ void isOneSwapTest() {
     assertFalse(isOneSwap(new int [] {1,2,3,4,5,6,1}));
 
 }
+@Test
+void sortAnyTypeTest() {
+    String [] strings = {"lmn", "cfta", "w", "aa"};
+    String [] expectedASCII = {"aa", "cfta", "lmn", "w"};
+    String [] expectedLength = {"w", "aa", "lmn", "cfta"};
+    sort(strings, new ComparatorASCII());
+    assertArrayEquals(expectedASCII, strings);
+    sort(strings, new ComparatorLength());
+    assertArrayEquals(expectedLength, strings);
+
+}
+@Test
+void binarySearchAnyTypeTest () {
+    //String [] strings = {"lmn", "cfta", "w", "aa"};
+    String [] expectedASCII = {"aa", "cfta", "lmn", "w"};
+    String [] expectedLength = {"w", "aa", "lmn", "cfta"};
+    int res = binarySearch(expectedLength,"lmn", new ComparatorLength());
+    assertEquals(2, res);
+    res = binarySearch(expectedLength,"cfta", new ComparatorLength());
+    assertEquals(3, res);
+    res = binarySearch(expectedASCII,"w", new ComparatorASCII());
+    assertEquals(3, res);
+    res = binarySearch(expectedASCII,"aa", new ComparatorASCII());
+    assertEquals(0, res);
+    Integer[] numbers = {10, 20, 30, 40, 50};
+    res = binarySearch(numbers, 30, new ComparatorInteger());
+    assertEquals(2, res);
+    res = binarySearch(numbers, 60, new ComparatorInteger());
+    assertEquals(-6, res);
+    res = binarySearch(numbers, -5, new ComparatorInteger());
+    assertEquals(-1, res);
+}   
 }
