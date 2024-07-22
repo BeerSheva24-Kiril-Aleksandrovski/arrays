@@ -1,6 +1,7 @@
 package telran.util;
 
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 public class Arrays {
     public static int search(int[] ar, int key) {
@@ -64,7 +65,6 @@ public class Arrays {
      * @return see comments definition
      */
     public static int binarySearch(int[] ar, int key) {
-        // TODO
         // index of the search key, if it is contained in the array;
         // otherwise, (-(insertion point) - 1).
         // The insertion point is defined as the point at which the key would be
@@ -90,7 +90,6 @@ public class Arrays {
     }
 
     public static int[] insertSorted(int[] arSorted, int number) {
-        // TODO
         // arSorted is sorted array
         // to insert number at index to keep the array sorted
         // additional sorting is disallowed
@@ -106,7 +105,6 @@ public class Arrays {
     }
 
     public static boolean isOneSwap(int[] array) {
-        ////TODO
         //return true if a given array has exactly one swap to get sorted array
         //the swaped array's elements may or may not be neighbors 
         int[] newArr = java.util.Arrays.copyOf(array, array.length);
@@ -143,9 +141,10 @@ public class Arrays {
         int res = -1;
         while (low <= high) {
             int mid = (low + high) / 2;
-            if (comp.compare(array[mid], key) < 0) {
+            int cmp = comp.compare(array[mid], key);
+            if (cmp < 0) {
                 low = mid + 1;
-            } else if (comp.compare(array[mid], key) > 0) {
+            } else if (cmp > 0) {
                 high = mid - 1;
             } else {
                 res = mid;
@@ -154,7 +153,26 @@ public class Arrays {
         }
         return res == -1 ? -low - 1 : res;
     } 
-    
-     
-    
+    public static <T> int binarySearch(T[] array, T key){
+        return -1;
+    }
+
+    public static <T> T[] insert(T[] array, int index, T item){
+        T [] newArr = java.util.Arrays.copyOf(array, array.length + 1);
+        newArr[index] = item;
+        System.arraycopy(array, index, newArr, index + 1, array.length - index);
+        return newArr;
+    }
+    public static <T> T[] find(T[] array, Predicate<T> predicate){
+        T [] result = java.util.Arrays.copyOf(array, 0);
+        for (int i = 0; i < array.length; i++){ 
+            if (predicate.test(array[i])){
+                result = insert(result, result.length, array[i]);
+            }
+        }
+        return result;
+    }
+    public static <T> T [] removeIf(T [] array, Predicate <T> predicate) {
+        return find(array, predicate.negate()) ;
+    }   
 }

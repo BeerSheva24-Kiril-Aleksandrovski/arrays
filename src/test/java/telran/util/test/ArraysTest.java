@@ -143,4 +143,43 @@ void binarySearchAnyTypeTest () {
     res = binarySearch(numbers, -5, new ComparatorInteger());
     assertEquals(-1, res);
 }   
+@Test
+void binarySearchNoComparator () {
+    String [] strings = {"aa", "cfta", "lmn", "w"};
+    Person prs1 = new Person(10, "Vasya");
+    Person prs2 = new Person(20, "Itay");
+    Person prs3 = new Person(30, "Sara");
+    Person [] persons = {
+        prs1, prs2, prs3
+    };
+    assertEquals (1, java.util.Arrays.binarySearch(strings, "cfta"));
+    assertEquals (0, java.util.Arrays.binarySearch(persons, prs1));
+    assertEquals (-1, java.util.Arrays.binarySearch(persons, new Person(5, "Serg")));
 }
+@Test
+void evenOddSorting () {
+    Integer [] array = {7, -8, 10, -100, 13, -10, 99};
+    Integer [] expected = {-100, -10, -8, 10, 99, 13 , 7}; //even in ascending order first, odd in descending order after that
+    sort(array, new EvenOddComparator());
+    assertArrayEquals(expected, array);
+}
+@Test
+void findTest () {
+    Integer [] array = {7, -8, 10, -100, 13, -10, 99};
+    Integer [] expected = {7, 13, 99};
+    assertArrayEquals(expected, find(array, new OddNumbersPredicate()));
+    
+}
+@Test
+void removeIfTest () {
+    Integer [] array = {7, -8, 10, -100, 13, -10, 99};
+    Integer [] expectedEven = {-8, 10, -100, -10};
+    assertArrayEquals(expectedEven, removeIf(array, new OddNumbersPredicate()));
+    Integer [] expectedOdd = {7, 13, 99};
+    assertArrayEquals(expectedOdd, removeIf(array, new EvenNumbersPredicate()));
+    String [] string = {"aa", "", "cfta", "", "lmn", "w"};
+    String [] withoutEmpty = {"aa", "cfta", "lmn", "w"};
+    assertArrayEquals(withoutEmpty, removeIf(string, new EmptyStringPredicate()));
+}
+}
+
