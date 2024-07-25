@@ -154,7 +154,7 @@ public class Arrays {
         return res == -1 ? -low - 1 : res;
     } 
     public static <T> int binarySearch(T[] array, T key){
-        return -1;
+        return binarySearch(array, key,(Comparator<T>) Comparator.naturalOrder());
     }
 
     public static <T> T[] insert(T[] array, int index, T item){
@@ -175,4 +175,35 @@ public class Arrays {
     public static <T> T [] removeIf(T [] array, Predicate <T> predicate) {
         return find(array, predicate.negate()) ;
     }   
+    public static String matchesRules(char[] chars, CharacterRule[] mustBeRules, CharacterRule[] mustNotBeRules) {
+        String errorMassage0 = checkRules(chars, mustBeRules);
+        String errorMassage1 = checkRules(chars,mustNotBeRules);
+
+        return errorMassage0 + errorMassage1;
+    }
+
+    private static String checkRules(char[] chars, CharacterRule[] rules) {
+        String errorMassage  = "";
+        for (int i = 0; i < rules.length; i++) {
+            errorMassage += checkRule(chars, rules[i]);
+        }
+        return errorMassage;
+    }
+
+    private static String checkRule(char[] chars, CharacterRule rule) {
+        boolean isMissed = true;
+        int j = 0;
+        while (isMissed && j < chars.length) {
+            char ch = chars[j];
+            boolean test = rule.getPredicate().test(ch);
+            if (test) { 
+                isMissed = false;
+            }
+            j++;
+        }
+        boolean res = (rule.getFlag() && isMissed) || (!rule.getFlag() && !isMissed) ;
+        return res ? rule.getErrorMassage(): "";
+
+    }
+
 }
